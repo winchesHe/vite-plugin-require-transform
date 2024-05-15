@@ -15,6 +15,8 @@ type VitePluginRequireTransformParamsType = {
 	importPrefix?: string,
 	/** Function to convert the require path to the import variable name */
 	importPathHandler?: Function
+	/** Generate value convert */
+	valueConvert?: Function
 }
 
 export default function vitePluginRequireTransform(
@@ -24,7 +26,8 @@ export default function vitePluginRequireTransform(
 	const {
 		fileRegex = /.ts$|.tsx$/,
 		importPrefix: prefix = '_vite_plugin_require_transform_',
-		importPathHandler = (path: string) => path.replace(/(.*\/)*([^.]+).*/ig, "$2").replace(/-/g, '_')
+		importPathHandler = (path: string) => path.replace(/(.*\/)*([^.]+).*/ig, "$2").replace(/-/g, '_'),
+		valueConvert = (value: string) => value
 	} = params;
 
 	return {
@@ -128,7 +131,8 @@ export default function vitePluginRequireTransform(
 				// Create import statement
 				const firstNode = nodes[0];
 				const importNamespaceSpecifier = t.importNamespaceSpecifier(identifier);
-				const importDeclaration = t.importDeclaration([importNamespaceSpecifier], t.stringLiteral(requirePath));
+				const convertRequireValue = valueConvert(requirePath);
+				const importDeclaration = t.importDeclaration([importNamespaceSpecifier], t.stringLiteral(convertRequireValue));
 				importDeclaration.loc = firstNode.node.loc;
 				const rootNode = firstNode.findParent((path) => path.parentPath?.isProgram() || false);
 				rootNode?.insertBefore(importDeclaration);
