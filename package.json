@@ -26,19 +26,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WarrenJones/vite-plugin-require-transform.git"
+    "url": "git+https://github.com/winchesHe/vite-plugin-require-transform.git"
   },
   "keywords": [
     "vite",
     "vite-plugin",
     "require"
   ],
-  "author": "warrenjones",
+  "author": "winches",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WarrenJones/vite-plugin-require-transform/issues"
+    "url": "https://github.com/winchesHe/vite-plugin-require-transform/issues"
   },
-  "homepage": "https://github.com/WarrenJones/vite-plugin-require-transform#readme",
+  "homepage": "https://github.com/winchesHe/vite-plugin-require-transform#readme",
   "dependencies": {
     "@babel/generator": "^7.22.5",
     "@babel/parser": "^7.22.5",
